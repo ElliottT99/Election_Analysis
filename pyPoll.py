@@ -35,7 +35,7 @@ with open(file_to_load) as election_data:
     #to do: analyze data
     file_reader = csv.reader(election_data)
     
-    #headers = next(file_reader)
+    headers = next(file_reader)
     #print(headers)
     
     for row in file_reader:
@@ -49,29 +49,48 @@ with open(file_to_load) as election_data:
             candidate_votes[candidate_name] = 0
         
         candidate_votes[candidate_name] += 1
-    
+
+with open(file_to_save, "w") as txt_file:
+
+    # Print the final vote count to the terminal.
+    election_results = (
+        f"\nElection Results\n"
+        f"-------------------------\n"
+        f"Total Votes: {total_votes:,}\n"
+        f"-------------------------\n")
+    print(election_results, end="")
+    # Save the final vote count to the text file.
+    txt_file.write(election_results)
+
+
     for candidate_name in candidate_votes:
         votes = candidate_votes[candidate_name]
         votes_percentage = float(votes)/float(total_votes) * 100
         #print(f'{candidate_name} recieved {votes_percentage:.3}% of the votes')
+        candidate_results = (f"{candidate_name}: {votes_percentage:.1f}% ({votes:,})\n")
 
         if (votes > winning_count) and (votes_percentage > winning_percentage):
-         winning_count = votes
-         winning_percentage = votes_percentage
-         winning_candidate = candidate_name
-        print(f"{candidate_name}: {votes_percentage:.1f}% ({votes:,})\n")
+            winning_count = votes
+            winning_percentage = votes_percentage
+            winning_candidate = candidate_name
+            #candidate_results = (f"{candidate_name}: {votes_percentage:.1f}% ({votes:,})\n")
+        
+        print(candidate_results)
+        txt_file.write(candidate_results)
 
 #print(total_votes)
 #print(candadite_options)
 #print(candadite_votes)
 
-winning_candidate_summary = (
+
+    winning_candidate_summary = (
     f"-------------------------\n"
     f"Winner: {winning_candidate}\n"
     f"Winning Vote Count: {winning_count:,}\n"
     f"Winning Percentage: {winning_percentage:.1f}%\n"
     f"-------------------------\n")
-print(winning_candidate_summary)
+    print(winning_candidate_summary)
+    txt_file.write(winning_candidate_summary)
 
 #1. total number of votes
 #2. list of candadites who recieved votes
