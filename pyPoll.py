@@ -6,7 +6,7 @@ import os
 #accessing .csv file to read the results
 
 file_to_load = os.path.join("..", "Resources", "election_results.csv")
-file_to_save = os.path.join("..", "analysis", "election_analysis.txt")
+file_to_save = os.path.join("analysis", "election_analysis.txt")
 
 #testing writing to files
 #outfile = open(file_to_save, "w")
