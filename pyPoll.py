@@ -42,8 +42,10 @@ with open(file_to_load) as election_data:
         #prints each row in csv
         #print(row)
         #add to the total vote count
+#1. total number of votes
         total_votes += 1
         candidate_name = row[2]
+#2. list of candadites who recieved votes
         if candidate_name not in candidate_options:
             candidate_options.append(candidate_name)
             candidate_votes[candidate_name] = 0
@@ -65,10 +67,13 @@ with open(file_to_save, "w") as txt_file:
 
     for candidate_name in candidate_votes:
         votes = candidate_votes[candidate_name]
+        
+        #3. percentage of votes for each voter
         votes_percentage = float(votes)/float(total_votes) * 100
         #print(f'{candidate_name} recieved {votes_percentage:.3}% of the votes')
+        #4. total number of votes for each candadite
         candidate_results = (f"{candidate_name}: {votes_percentage:.1f}% ({votes:,})\n")
-
+        #to determine winning candidate
         if (votes > winning_count) and (votes_percentage > winning_percentage):
             winning_count = votes
             winning_percentage = votes_percentage
@@ -78,11 +83,12 @@ with open(file_to_save, "w") as txt_file:
         print(candidate_results)
         txt_file.write(candidate_results)
 
+#to check for correct outputs
 #print(total_votes)
 #print(candadite_options)
 #print(candadite_votes)
 
-
+#5. winner of election based on popular votes
     winning_candidate_summary = (
     f"-------------------------\n"
     f"Winner: {winning_candidate}\n"
@@ -92,13 +98,7 @@ with open(file_to_save, "w") as txt_file:
     print(winning_candidate_summary)
     txt_file.write(winning_candidate_summary)
 
-#1. total number of votes
-#2. list of candadites who recieved votes
-#3. percentage of votes for each voter
-#4. total number of votes for each candadite
-#5. winner of election based on popular votes
-
-
+#testing
 #close the files
 #outfile.close()
 #election_data.close()
