@@ -37,7 +37,7 @@ The analysis of the election show that:
 ## Results
 
 * The winner of this election was:
-  * Diana DeGette recieved 73.8% of the votes, with 272,892 votes in total
+  * Diana DeGette, who recieved 73.8% of the votes, with 272,892 votes in total
 * The largest contributing county for this election was:
   * Denver, with 82.8% of the votes overall, a total of 272,892 votes from this county.
 
